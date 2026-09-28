@@ -10,9 +10,10 @@
 <body>
     <h1 style="text-align: center; font-size: 60px;">Crypto Coin Tracker</h1>
 
+
     <div id="infoContainer">
 
-        <h3 style="font-size: 15px; text-align:center;">Search a coin to analyse:</h3>
+        <h3 style="font-size: 15px; text-align:center; ">Search a coin to analyse:</h3>
 
 
         <div id="coinSearchContainer">
@@ -21,21 +22,23 @@
         </div>
 
 
+        <div id="chartRow">
+            <div id="timePeriodButtonContainer">
+                <button class="timePeriodButton" onClick="changeTimeSeriesLength(360, this)">1yr</button>
+                <button class="timePeriodButton" onClick="changeTimeSeriesLength(180, this)">6mo</button>
+                <button class="timePeriodButton" onClick="changeTimeSeriesLength(30, this)">1mo</button>
+                <button class="timePeriodButton" onClick="changeTimeSeriesLength(7, this)">1w</button>
+                <button class="timePeriodButton active" onClick="changeTimeSeriesLength(1, this)">1d</button>
+            </div>
 
-        <div class="chart-container">
-            <canvas id="priceChart">This browser doesn't support canvas HTML tags</canvas>
+
+            <div class="chart-container">
+                <canvas id="priceChart">This browser doesn't support canvas HTML tags</canvas>
+            </div>
         </div>
 
 
         <p id="apiErrorText" style="text-align: center;"></p>
-
-        <div id="timePeriodButtonContainer">
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(360, this)">1yr</button>
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(180, this)">6mo</button>
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(30, this)">1mo</button>
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(7, this)">1w</button>
-            <button class="timePeriodButton active" onClick="changeTimeSeriesLength(1, this)">1d</button>
-        </div>
 
 
         

@@ -9,19 +9,6 @@
 
 
 
-.chart-container{
-    width: 55%;
-    aspect-ratio: 2;
-
-
-    margin: auto;
-    margin-top: 30px;
-
-    border: 3px solid black ;
-    border-radius: 10px;
-    padding: 20px;
-}
-
 
 
 #currentPrice{
@@ -81,16 +68,21 @@
 
 
 #timePeriodButtonContainer{
-    width: 400px;
-    height: 50px;
-    margin: auto;
-    margin-top: 5px;
+    display: flex;
+    width: 50px;
+    height: 275px;
+
+    justify-self: end;
+    flex-direction: column;
+    gap: 6px;  
 }
 
 
 .timePeriodButton{
-    width: 18%;
-    height: 100%;
+    width: 100%;
+    height: 18%;
+
+    margin-top: auto;
 
     border: none;
     border-radius: 5px;
@@ -110,3 +102,24 @@
 
 
 
+.chart-container{
+    width: 100%;
+    aspect-ratio: 2;
+
+
+    border: 3px solid black ;
+    border-radius: 10px;
+    padding: 20px;
+
+}
+
+
+
+#chartRow {
+    display: grid;
+    grid-template-columns: 1fr 55% 1fr; 
+    align-items: start;
+    margin-top: 30px; 
+    
+    gap: 10px;
+}

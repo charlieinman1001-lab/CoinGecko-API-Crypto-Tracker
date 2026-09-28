@@ -3,17 +3,18 @@ async function fetchRequest(url){
         const response = await fetch(url)
 
         if(!response.ok){
-            throw new Error(`API error: ${response.status} ${response.statusText}`)
+            const err = new Error(`API error: ${response.status} ${response.statusText}`)
+            err.status = response.status
+            throw err
         }
-        document.getElementById("apiErrorText").innerHTML = ""
 
-        const data = await response.json()
-        return data
+        document.getElementById("apiErrorText").innerHTML = ""
+        return await response.json()
 
     }catch(error){
         console.log(`Failed to fetch from ${url}`)
 
-        document.getElementById("apiErrorText").innerHTML = "Too many API requests, please wait a moment and try again"                 
+        document.getElementById("apiErrorText").innerHTML = "Couldn't reach the API. This may be a result of too many fetch requests, please wait a minute and try again."
 
         throw error
     } 
@@ -68,7 +69,6 @@ function updateDropdownMatches(){
     resultsList.innerHTML = ''
 
     let matches
-    console.log(query)
     if (query.length === 0){
         matches = defaultDropdownMatches
     }
@@ -121,12 +121,7 @@ document.addEventListener('click', (event) => {
 
 
 
-
-
-
-
-
-
+ 
 
 
 
@@ -177,13 +172,17 @@ async function displayCoinData(){
 
 
 function changeTimeSeriesLength(days, clickedBtn){
-    timeSeriesLength = days
-    displayCoinData()
-
     const buttons = document.querySelectorAll(".timePeriodButton")
 
-    buttons.forEach(btn => btn.classList.remove('active'))
-    clickedBtn.classList.add('active')
+    if(!clickedBtn.classList.contains("active")){
+        timeSeriesLength = days
+        displayCoinData()
+
+
+        buttons.forEach(btn => btn.classList.remove('active'))
+        clickedBtn.classList.add('active')    
+    }
+
 }
 
 

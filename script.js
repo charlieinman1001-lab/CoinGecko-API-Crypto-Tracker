@@ -210,17 +210,23 @@ async function displayCoinAnalytics(){
     const coinData = await fetchRequest(`https://api.coingecko.com/api/v3/coins/${currentCoinId}?localization=false&tickers=false&community_data=false&developer_data=false`)
 
 
-    currentCoinPrice = coinData.market_data.current_price.gbp;
-    const marketCap = coinData.market_data.market_cap.gbp;
-    const change24h = coinData.market_data.price_change_percentage_24h;
+    currentCoinPrice = coinData.market_data.current_price.gbp
+    const marketCap = coinData.market_data.market_cap.gbp
+    const change24h = coinData.market_data.price_change_percentage_24h
+    const coinLogoURL = coinData.image.small
 
 
-    document.getElementById("coinPrice").innerHTML = `${parseFloat(currentCoinPrice.toPrecision(5))} gbp`
+    document.getElementById("coinPrice").innerHTML = `${parseFloat(currentCoinPrice.toPrecision(5))}gbp`
     document.getElementById("marketCap").innerHTML = `Market Cap: ${stringifyNumber(parseFloat(marketCap.toPrecision(3)))} gbp`
+
+    if(coinLogoURL){document.getElementById("coinLogo").src = coinLogoURL}
+    else{
+        document.getElementById("coinLogo").src = ""
+    }
 
 
     const dailyChangeElement = document.getElementById("24hrChange")
-    dailyChangeElement.innerHTML = `${change24h.toPrecision(3)}%`
+    dailyChangeElement.innerHTML = `${parseFloat(change24h.toPrecision(3))}%`
 
     if(change24h > 0){
         dailyChangeElement.style.color = "green"

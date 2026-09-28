@@ -23,7 +23,7 @@ async function fetchRequest(url){
 
 
 
-let priceChart
+let priceChart, currentCoinPrice
 let currentCoinId = "bitcoin"
 let timeSeriesLength = 1
 let currentCoinName = "Bitcoin"
@@ -60,6 +60,24 @@ loadCoinList()
 
 
 
+function stringifyNumber(num){   //nifty little function that makes big numbers nice to read
+    const endings = ["k", "M", "B", "T", "Quad", "Quint", "Sept"]
+
+    const numString = num.toString()   //toPrecision doesnt work here, toString() might affect length
+    const numOfDigits = numString.length
+
+    if(num < 1000){
+        return numString
+    }
+
+    const index = parseInt(Math.floor(numOfDigits/3)) 
+    console.log(index)
+    return numString/(10**(3*index)) + endings[index-1]
+
+}
+
+
+
 
 const searchInput = document.getElementById('coinSearch')
 const resultsList = document.getElementById('coinResults')
@@ -91,6 +109,7 @@ function updateDropdownMatches(){
             resultsList.innerHTML = ''
             currentCoinId = coin.id
             displayCoinData()
+            displayCoinAnalytics()
         });
         resultsList.appendChild(li)
     });
@@ -168,6 +187,7 @@ async function displayCoinData(){
         }
     }
     })
+
 }
 
 
@@ -186,7 +206,38 @@ function changeTimeSeriesLength(days, clickedBtn){
 }
 
 
-displayCoinData();
+async function displayCoinAnalytics(){
+    const coinData = await fetchRequest(`https://api.coingecko.com/api/v3/coins/${currentCoinId}?localization=false&tickers=false&community_data=false&developer_data=false`)
+
+
+    currentCoinPrice = coinData.market_data.current_price.gbp;
+    const marketCap = coinData.market_data.market_cap.gbp;
+    const change24h = coinData.market_data.price_change_percentage_24h;
+
+
+    document.getElementById("coinPrice").innerHTML = `${parseFloat(currentCoinPrice.toPrecision(5))} gbp`
+    document.getElementById("marketCap").innerHTML = `Market Cap: ${stringifyNumber(parseFloat(marketCap.toPrecision(3)))} gbp`
+
+
+    const dailyChangeElement = document.getElementById("24hrChange")
+    dailyChangeElement.innerHTML = `${change24h.toPrecision(3)}%`
+
+    if(change24h > 0){
+        dailyChangeElement.style.color = "green"
+    }
+    else{
+        dailyChangeElement.style.color = "red"
+    }
+
+
+
+}
+
+
+
+
+displayCoinAnalytics()
+displayCoinData()
 
 
 

@@ -30,11 +30,11 @@
         <p id="apiErrorText" style="text-align: center;"></p>
 
         <div id="timePeriodButtonContainer">
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(360)">1yr</button>
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(180)">6mo</button>
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(30)">1mo</button>
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(7)">1w</button>
-            <button class="timePeriodButton" onClick="changeTimeSeriesLength(1)">1d</button>
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(360, this)">1yr</button>
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(180, this)">6mo</button>
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(30, this)">1mo</button>
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(7, this)">1w</button>
+            <button class="timePeriodButton active" onClick="changeTimeSeriesLength(1, this)">1d</button>
         </div>
 
 

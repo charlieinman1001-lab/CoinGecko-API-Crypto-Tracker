@@ -24,7 +24,7 @@ async function fetchRequest(url){
 
 let priceChart
 let currentCoinId = "bitcoin"
-let timeSeriesLength = 30
+let timeSeriesLength = 1
 let currentCoinName = "Bitcoin"
 let allCoins = []
 
@@ -54,6 +54,7 @@ async function loadCoinList() {
         localStorage.setItem('coinListTime', Date.now())
     }
 }
+loadCoinList()
 
 
 
@@ -115,7 +116,6 @@ document.addEventListener('click', (event) => {
 
 
 
-loadCoinList()
 
 
 
@@ -176,14 +176,15 @@ async function displayCoinData(){
 }
 
 
-
-function changeTimeSeriesLength(days){
+function changeTimeSeriesLength(days, clickedBtn){
     timeSeriesLength = days
     displayCoinData()
+
+    const buttons = document.querySelectorAll(".timePeriodButton")
+
+    buttons.forEach(btn => btn.classList.remove('active'))
+    clickedBtn.classList.add('active')
 }
-
-
-
 
 
 displayCoinData();

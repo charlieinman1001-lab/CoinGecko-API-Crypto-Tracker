@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <title>Crypto Tracker</title>
+</head>
+<body>
+    <h1 style="text-align: center; font-size: 60px;">Crypto Coin Tracker</h1>
+
+    <div id="infoContainer">
+
+        <h3 style="font-size: 15px; text-align:center;">Choose a coin to analyse</h3>
+
+
+        <div id="coinSearchContainer">
+            <input type="text" id="coinSearch" placeholder="e.g. Bitcoin">
+            <ul id="coinResults"></ul>
+        </div>
+
+
+
+        <div class="chart-container">
+            <canvas id="priceChart">This browser doesn't support canvas HTML tags</canvas>
+        </div>
+
+
+        <p id="apiErrorText" style="text-align: center;"></p>
+
+        <div id="timePeriodButtonContainer">
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(360)">1yr</button>
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(180)">6mo</button>
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(30)">1mo</button>
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(7)">1w</button>
+            <button class="timePeriodButton" onClick="changeTimeSeriesLength(1)">1d</button>
+        </div>
+
+
+        
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+
+    
+</body>
+</html>

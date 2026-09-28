@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family:'Courier New', Courier, monospace;
+}
+
+
+
+
+.chart-container{
+    width: 55%;
+    aspect-ratio: 2;
+
+
+    margin: auto;
+    margin-top: 30px;
+
+    border: 3px solid black ;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+
+
+#currentPrice{
+    text-align:center;
+    font-size: 80px;
+}
+
+
+
+#infoContainer{
+    margin-top: 25px;
+}
+
+
+
+#coinSearch{
+    height: 30px;
+    width: 300px;
+    font-size: 20px;
+}
+
+#coinResults {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 300px;
+    max-height: 200px;
+    background-color: #fff;
+    overflow-y: scroll;
+    overflow-x:hidden;
+
+    background-color: rgb(250, 250, 250);
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+}
+
+#coinResults li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#coinResults li:hover {
+    background: #eee;
+}
+
+#coinSearchContainer{
+    text-align: center;
+    margin:auto;
+    max-width: 300px;
+
+    position: relative;
+}
+
+
+
+#timePeriodButtonContainer{
+    width: 400px;
+    height: 50px;
+    margin: auto;
+    margin-top: 5px;
+}
+
+
+.timePeriodButton{
+    width: 18%;
+    height: 100%;
+
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.timePeriodButton:hover{
+    background-color: darkgrey;
+    scale: 1.08;
+}
+
+
+

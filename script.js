@@ -26,14 +26,15 @@ let priceChart
 let currentCoinId = "bitcoin"
 let timeSeriesLength = 30
 let currentCoinName = "Bitcoin"
-
-
-
-
-
-
-
 let allCoins = []
+
+const defaultDropdownMatches = [    
+    { id: 'bitcoin', symbol: 'btc', name: 'Bitcoin' },
+    { id: 'ethereum', symbol: 'eth', name: 'Ethereum' },
+    { id: 'binancecoin', symbol: 'bnb', name: 'BNB' },
+    { id: 'ripple', symbol: 'xrp', name: 'XRP' },
+    { id: 'solana', symbol: 'sol', name: 'Solana' }
+]
 
 
 async function loadCoinList() {
@@ -61,26 +62,23 @@ async function loadCoinList() {
 const searchInput = document.getElementById('coinSearch')
 const resultsList = document.getElementById('coinResults')
 
-searchInput.addEventListener("click", () => {
-    searchInput.value = ''
-    resultsList.innerHTML = ''
-
-})
-
-searchInput.addEventListener('input', () => {
+function updateDropdownMatches(){
     const query = searchInput.value.trim().toLowerCase()
     resultsList.innerHTML = ''
 
+    let matches
+    console.log(query)
     if (query.length === 0){
-
-    }  //add default list of popular coins (BTC, ETH, etc.)
-
-    const matches = allCoins
-        .filter(coin =>
-            coin.name.toLowerCase().includes(query) ||
-            coin.symbol.toLowerCase().includes(query)
-        )
-        .slice(0, 100)
+        matches = defaultDropdownMatches
+    }
+    else{
+        matches = allCoins
+            .filter(coin =>
+                coin.name.toLowerCase().includes(query) ||
+                coin.symbol.toLowerCase().includes(query)
+            )
+            .slice(0, 100)        //to prevent dropdown options from blowing up 
+    }
 
     matches.forEach(coin => {
         const li = document.createElement('li')
@@ -95,12 +93,29 @@ searchInput.addEventListener('input', () => {
         });
         resultsList.appendChild(li)
     });
-});
+}
 
 
 
-loadCoinList();
 
+searchInput.addEventListener('input', updateDropdownMatches)
+
+searchInput.addEventListener('click', () => {  //reset dropdown to default choices when input box is clicked on 
+    searchInput.value = ''
+    updateDropdownMatches()
+
+})
+
+document.addEventListener('click', (event) => {
+    const searchWrapper = document.getElementById('coinSearchContainer')
+    if(!searchWrapper.contains(event.target)){
+        resultsList.innerHTML = ''
+    }
+})
+
+
+
+loadCoinList()
 
 
 

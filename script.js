@@ -22,7 +22,6 @@ async function fetchRequest(url){
 
 
 
-
 let priceChart, currentCoinPrice
 let currentCoinId = "bitcoin"
 let timeSeriesLength = 1
@@ -70,8 +69,7 @@ function stringifyNumber(num){   //nifty little function that makes big numbers 
         return numString
     }
 
-    const index = parseInt(Math.floor(numOfDigits/3)) 
-    console.log(index)
+    const index = parseInt(Math.floor((numOfDigits-1)/3)) 
     return numString/(10**(3*index)) + endings[index-1]
 
 }
@@ -214,10 +212,12 @@ async function displayCoinAnalytics(){
     const marketCap = coinData.market_data.market_cap.gbp
     const change24h = coinData.market_data.price_change_percentage_24h
     const coinLogoURL = coinData.image.small
+    const marketCapRank = coinData.market_cap_rank
 
 
     document.getElementById("coinPrice").innerHTML = `${parseFloat(currentCoinPrice.toPrecision(5))}gbp`
-    document.getElementById("marketCap").innerHTML = `Market Cap: ${stringifyNumber(parseFloat(marketCap.toPrecision(3)))} gbp`
+    document.getElementById("marketCapRank").innerHTML = `${marketCapRank}`
+    document.getElementById("marketCap").innerHTML = `${stringifyNumber(parseFloat(marketCap.toPrecision(3)))} gbp`
 
     if(coinLogoURL){document.getElementById("coinLogo").src = coinLogoURL}
     else{
@@ -230,6 +230,7 @@ async function displayCoinAnalytics(){
 
     if(change24h > 0){
         dailyChangeElement.style.color = "green"
+        dailyChangeElement.innerHTML = "+" + dailyChangeElement.innerHTML
     }
     else{
         dailyChangeElement.style.color = "red"
